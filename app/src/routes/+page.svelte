@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getColorHex } from '$lib/utils/get-color-hex';
 	import type { PageProps } from './$types';
 	import { format } from 'date-fns';
 
@@ -23,7 +24,10 @@
 					<td>{format(metric.datetime, 'yyyy-MM-dd HH:mm')}</td>
 					<td>
 						<div class="d-flex align-items-center">
-							<div class="color-swatch me-2" style="background-color: #{metricType.color};"></div>
+							<div
+								class="color-swatch me-2"
+								style="background-color: {getColorHex(metricType.color)};"
+							></div>
 							{metricType.name}
 						</div>
 					</td>
