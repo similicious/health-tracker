@@ -462,6 +462,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sveltejs/adapter-static@npm:^3.0.9":
+  version: 3.0.9
+  resolution: "@sveltejs/adapter-static@npm:3.0.9"
+  peerDependencies:
+    "@sveltejs/kit": ^2.0.0
+  checksum: 10c0/d8333728b683666e46ffb54c1ba9cac75abc42181e7271f48d2ef5374a109112c0e637bed4801f14da2398cc34f5092f925955b4a62b6c67fffd959d96582ef0
+  languageName: node
+  linkType: hard
+
 "@sveltejs/kit@npm:^2.22.0":
   version: 2.29.1
   resolution: "@sveltejs/kit@npm:2.29.1"
@@ -600,6 +609,7 @@ __metadata:
   resolution: "app@workspace:."
   dependencies:
     "@sveltejs/adapter-auto": "npm:^6.0.0"
+    "@sveltejs/adapter-static": "npm:^3.0.9"
     "@sveltejs/kit": "npm:^2.22.0"
     "@sveltejs/vite-plugin-svelte": "npm:^6.0.0"
     "@types/bootstrap": "npm:^5"

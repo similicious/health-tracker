@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { MetricType } from '$lib/model/metric-type';
+	import type { Metric } from '$lib/model/metric';
 	import { format } from 'date-fns';
-	import { enhance } from '$app/forms';
+	import { pb } from '$lib/pocketbase';
+	import { goto } from '$app/navigation';
 
 	let { metricTypes }: { metricTypes: MetricType[] } = $props();
 
@@ -9,9 +11,41 @@
 	let selectedMetricType = $derived(
 		metricTypes.find((metricType) => metricType.id === selectedMetricTypeId)
 	);
+	let isSubmitting = $state(false);
+
+	async function handleSubmit(event: Event) {
+		event.preventDefault();
+		isSubmitting = true;
+
+		const formData = new FormData(event.target as HTMLFormElement);
+		const metricTypeId = formData.get('metricTypeId')?.toString();
+		const value = formData.get('value')?.toString();
+		const datetime = formData.get('datetime')?.toString();
+		const note = formData.get('note')?.toString();
+
+		if (!value || !datetime || !metricTypeId) {
+			isSubmitting = false;
+			return;
+		}
+
+		try {
+			await pb.collection('metric').create<Metric>({
+				metric_type: metricTypeId,
+				value: parseFloat(value),
+				note: note || undefined,
+				datetime: new Date(datetime)
+			});
+
+			goto('/');
+		} catch (error) {
+			console.error('Failed to create metric:', error);
+		} finally {
+			isSubmitting = false;
+		}
+	}
 </script>
 
-<form method="POST" use:enhance class="row g-3">
+<form onsubmit={handleSubmit} class="row g-3">
 	<div class="col-md-6">
 		<label for="metricTypeId" class="form-label">Metric Type</label>
 		<select
@@ -49,6 +83,8 @@
 		/>
 	</div>
 	<div class="col-12">
-		<button type="submit" class="btn btn-primary">Add Metric</button>
+		<button type="submit" class="btn btn-primary" disabled={isSubmitting}>
+			{isSubmitting ? 'Adding...' : 'Add Metric'}
+		</button>
 	</div>
 </form>
