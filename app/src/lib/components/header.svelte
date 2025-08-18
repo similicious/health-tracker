@@ -21,9 +21,7 @@
 		</button>
 		<div class="collapse navbar-collapse" class:show={isMenuOpen} id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="/">Metrics</a>
-				</li>
+
 				<li class="nav-item">
 					<a class="nav-link" href="/add">Add Metric</a>
 				</li>
