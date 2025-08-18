@@ -1,5 +1,5 @@
 # Build stage for the SvelteKit app
-FROM node:20-alpine AS builder
+FROM node:lts-alpine AS builder
 
 # Install yarn
 RUN corepack enable
