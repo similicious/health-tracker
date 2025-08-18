@@ -24,6 +24,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/">Metrics</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/add">Add Metric</a>
+				</li>
 			</ul>
 		</div>
 	</div>

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import MetricAdd from '$lib/components/metric-add.svelte';
 	import type { PageProps } from './$types';
 	import { format } from 'date-fns';
 
@@ -7,8 +6,6 @@
 </script>
 
 <h1 class="mb-4">Metrics</h1>
-
-<MetricAdd metricTypes={data.metricTypes}></MetricAdd>
 
 <div class="table-responsive mt-4">
 	<table class="table table-striped table-hover">
