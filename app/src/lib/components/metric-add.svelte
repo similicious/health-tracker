@@ -4,18 +4,17 @@
 	import { format } from 'date-fns';
 	import { pb } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 
 	let { metricTypes }: { metricTypes: MetricType[] } = $props();
 
-	let selectedMetricTypeId = $state(metricTypes[0].id);
+	let metricTypeId = $derived(page.url.searchParams.get('metricTypeId') ?? metricTypes[0].id);
 	let selectedMetricType = $derived(
-		metricTypes.find((metricType) => metricType.id === selectedMetricTypeId)
+		metricTypes.find((metricType) => metricType.id === metricTypeId)
 	);
-	let isSubmitting = $state(false);
 
 	async function handleSubmit(event: Event) {
 		event.preventDefault();
-		isSubmitting = true;
 
 		const formData = new FormData(event.target as HTMLFormElement);
 		const metricTypeId = formData.get('metricTypeId')?.toString();
@@ -24,7 +23,6 @@
 		const note = formData.get('note')?.toString();
 
 		if (!value || !datetime || !metricTypeId) {
-			isSubmitting = false;
 			return;
 		}
 
@@ -39,9 +37,12 @@
 			goto('/');
 		} catch (error) {
 			console.error('Failed to create metric:', error);
-		} finally {
-			isSubmitting = false;
 		}
+	}
+
+	function onSelectedMetricTypeChange(e: Event) {
+		const selectedMetricTypeId = (e.target as HTMLSelectElement)?.value;
+		goto(`?${new URLSearchParams({ metricTypeId: selectedMetricTypeId })}`);
 	}
 </script>
 
@@ -50,8 +51,9 @@
 		<label for="metricTypeId" class="form-label">Metric Type</label>
 		<select
 			name="metricTypeId"
-			bind:value={selectedMetricTypeId}
 			class="form-select"
+			value={metricTypeId}
+			onchange={onSelectedMetricTypeChange}
 			id="metricTypeId"
 		>
 			{#each metricTypes as metricType}
@@ -83,8 +85,6 @@
 		/>
 	</div>
 	<div class="col-12">
-		<button type="submit" class="btn btn-primary" disabled={isSubmitting}>
-			{isSubmitting ? 'Adding...' : 'Add Metric'}
-		</button>
+		<button type="submit" class="btn btn-primary"> Add Metric </button>
 	</div>
 </form>

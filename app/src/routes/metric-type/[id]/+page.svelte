@@ -24,7 +24,7 @@
 			<p class="text-muted mb-0">{data.metricType.description}</p>
 		</div>
 	</div>
-	<a href="/add?type={data.metricType.id}" class="btn btn-primary">
+	<a href="/add?metricTypeId={data.metricType.id}" class="btn btn-primary">
 		Add {data.metricType.name}
 	</a>
 </div>
