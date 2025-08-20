@@ -4,9 +4,7 @@ import type { MetricType } from '$lib/model/metric-type';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async () => {
-	const metrics = await pb
-		.collection<Metric>('metric')
-		.getList(0, 50, { sort: '+datetime' });
+	const metrics = await pb.collection<Metric>('metric').getList(0, 50, { sort: '+datetime' });
 	const metricTypes = await pb.collection<MetricType>('metric_type').getFullList();
 
 	const metricTypesById = metricTypes.reduce(

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { getColorHex } from '$lib/utils/get-color-hex';
+	import StackedBarChart from '$lib/components/StackedBarChart.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -35,6 +36,11 @@
 		<p class="mb-0">Start tracking by adding your first {data.metricType.name} metric.</p>
 	</div>
 {:else}
+	<StackedBarChart
+		metrics={data.metrics}
+		metricType={data.metricType}
+	/>
+
 	<div class="row">
 		{#each data.metrics as metric}
 			<div class="col-md-6 col-lg-4 mb-3">
