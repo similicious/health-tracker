@@ -8,6 +8,10 @@
 	function toggleMenu() {
 		isMenuOpen = !isMenuOpen;
 	}
+
+	function closeMenu() {
+		isMenuOpen = false;
+	}
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -27,7 +31,11 @@
 			<ul class="navbar-nav">
 				{#each metricTypes as metricType}
 					<li class="nav-item">
-						<a class="nav-link d-flex align-items-center" href="/metric-type/{metricType.id}">
+						<a
+							class="nav-link d-flex align-items-center"
+							href="/metric-type/{metricType.id}"
+							onclick={closeMenu}
+						>
 							<div
 								class="me-2 rounded-circle"
 								style="width: 16px; height: 16px; background-color: {getColorHex(metricType.color)}"
@@ -37,7 +45,7 @@
 					</li>
 				{/each}
 				<li class="nav-item">
-					<a class="nav-link" href="/add">Add Metric</a>
+					<a class="nav-link" href="/add" onclick={closeMenu}>Add Metric</a>
 				</li>
 			</ul>
 		</div>
