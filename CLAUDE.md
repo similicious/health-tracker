@@ -10,10 +10,9 @@ This is a personal health metrics tracking application built with SvelteKit and 
 
 - **Frontend**: SvelteKit app in `/app` directory using TypeScript and Bootstrap
 - **Backend**: PocketBase embedded database with migrations in `/pb_migrations`
-- **Data Models**: 
+- **Data Models**:
   - `metric_type`: Defines metric categories (name, color, description, unit)
   - `metric`: Individual metric entries with values, dates, and notes
-- **Server Integration**: PocketBase client initialized in `hooks.server.ts` at `http://localhost:5173`
 
 ## Development Commands
 
@@ -26,7 +25,7 @@ yarn install
 # Start development server
 yarn dev
 
-# Build for production  
+# Build for production
 yarn build
 
 # Preview production build
@@ -47,7 +46,6 @@ yarn lint
 
 ## Key Files
 
-- `/app/src/hooks.server.ts`: PocketBase client initialization
 - `/app/src/lib/model/`: TypeScript interfaces for data models
 - `/app/src/routes/`: SvelteKit routes and pages
 - `/pb_migrations/`: Database schema migrations
